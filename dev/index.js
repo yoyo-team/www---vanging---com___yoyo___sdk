@@ -313,36 +313,88 @@ function get_notes(args)
 }
 
 module.exports=get_notes;
-
-
-document.body.addEventListener('yoyo:get_notes:args_check_failed',function(e)
-{
-    console.log(e);
-});
-document.body.addEventListener('yoyo:get_notes:error',function(e)
-{
-    console.log(e);
-});
-document.body.addEventListener('yoyo:get_notes:ok',function(e)
-{
-    console.log(e);
-});
-
-get_notes
-(
-    {
-        uid:'test'
-    }
-);
+//
+//
+// document.body.addEventListener('yoyo:get_notes:args_check_failed',function(e)
+// {
+//     console.log(e);
+// });
+// document.body.addEventListener('yoyo:get_notes:error',function(e)
+// {
+//     console.log(e);
+// });
+// document.body.addEventListener('yoyo:get_notes:ok',function(e)
+// {
+//     console.log(e);
+// });
+//
+// get_notes
+// (
+//     {
+//         uid:'test'
+//     }
+// );
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-/**
- * Created by 27822 on 2017-03-05.
- */
+var emit=__webpack_require__(1).emit;
+var config=__webpack_require__(0);
 
+function query_class(args)
+{
+    if(!args.class_name)
+    {
+        console.log(args);
+        emit({name:'query_class:args_check_failed'});
+    }
+    else
+    {
+        var xhr=new XMLHttpRequest();
+        xhr.responseType='json';
+        var url=config.base+'query_class?';
+        url+='class_name='+args.class_name;
+        xhr.open('get',url);
+        xhr.onload=function(e)
+        {
+            var res=xhr.response;
+            console.log(res);
+            if(res.status==='ok')
+            {
+                emit({name:'query_class:ok',message:res.message});
+            }
+            else
+            {
+                emit({name:'query_class:error',message:xhr.response});
+            }
+        };
+        xhr.send();
+    }
+}
+
+module.exports=query_class;
+
+
+document.body.addEventListener('yoyo:query_class:args_check_failed',function(e)
+{
+    console.log(e);
+});
+document.body.addEventListener('yoyo:query_class:error',function(e)
+{
+    console.log(e);
+});
+document.body.addEventListener('yoyo:query_class:ok',function(e)
+{
+    console.log(e);
+});
+
+query_class
+(
+    {
+        class_name:'test'
+    }
+);
 
 /***/ }),
 /* 7 */
