@@ -374,42 +374,96 @@ function query_class(args)
 }
 
 module.exports=query_class;
-
-
-document.body.addEventListener('yoyo:query_class:args_check_failed',function(e)
-{
-    console.log(e);
-});
-document.body.addEventListener('yoyo:query_class:error',function(e)
-{
-    console.log(e);
-});
-document.body.addEventListener('yoyo:query_class:ok',function(e)
-{
-    console.log(e);
-});
-
-query_class
-(
-    {
-        class_name:'test'
-    }
-);
+//
+//
+// document.body.addEventListener('yoyo:query_class:args_check_failed',function(e)
+// {
+//     console.log(e);
+// });
+// document.body.addEventListener('yoyo:query_class:error',function(e)
+// {
+//     console.log(e);
+// });
+// document.body.addEventListener('yoyo:query_class:ok',function(e)
+// {
+//     console.log(e);
+// });
+//
+// query_class
+// (
+//     {
+//         class_name:'test'
+//     }
+// );
 
 /***/ }),
 /* 7 */
 /***/ (function(module, exports) {
 
-/**
- * Created by 27822 on 2017-03-05.
- */
 
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+var emit=__webpack_require__(1).emit;
+var config=__webpack_require__(0);
+
+function set_location(args)
+{
+    if(!args.uid || !args.location)
+    {
+        console.log(args);
+        emit({name:'set_location:args_check_failed'});
+    }
+    else
+    {
+        var xhr=new XMLHttpRequest();
+        xhr.responseType='json';
+        var url=config.base+'set_location?';
+        url+='uid='+args.uid+'&';
+        url+='location='+args.location;
+        xhr.open('get',url);
+        xhr.onload=function(e)
+        {
+            var res=xhr.response;
+            console.log(res);
+            if(res.status==='ok')
+            {
+                emit({name:'set_location:ok',message:res.message});
+            }
+            else
+            {
+                emit({name:'set_location:error',message:xhr.response});
+            }
+        };
+        xhr.send();
+    }
+}
+
+module.exports=set_location;
 
 
+document.body.addEventListener('yoyo:set_location:args_check_failed',function(e)
+{
+    console.log(e);
+});
+document.body.addEventListener('yoyo:set_location:error',function(e)
+{
+    console.log(e);
+});
+document.body.addEventListener('yoyo:set_location:ok',function(e)
+{
+    console.log(e);
+});
+
+set_location
+(
+    {
+        uid:'test',
+        location:'test'
+    }
+);
 
 /***/ }),
 /* 9 */
