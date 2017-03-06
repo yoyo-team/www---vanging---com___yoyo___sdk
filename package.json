@@ -1,0 +1,8 @@
+{
+  "name": "navbar",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "webpack": "^2.2.1"
+  }
+}

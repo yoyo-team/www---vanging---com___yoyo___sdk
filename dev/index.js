@@ -1,0 +1,389 @@
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports) {
+
+var config={};
+config.base='//luoc.tech/yoyo/';
+
+module.exports=config;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+function emit(args)
+{
+    var event=new Event('yoyo:'+args.name);
+    event.message=args.message;
+    document.body.dispatchEvent(event);
+}
+
+module.exports.emit=emit;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var emit=__webpack_require__(1).emit;
+var config=__webpack_require__(0);
+
+function add_note(args)
+{
+    if(!args.cid||!args.uid||!args.segments)
+    {
+        console.log(args);
+        emit({name:'add_note:args_check_failed'});
+    }
+    else
+    {
+        var xhr=new XMLHttpRequest();
+        xhr.responseType='json';
+        var url=config.base+'add_note?';
+        url+='cid='+args.cid+'&';
+        url+='uid='+args.uid+'&';
+        url+='segments='+args.segments;
+        xhr.open('get',url);
+        xhr.onload=function(e)
+        {
+            var res=xhr.response;
+            console.log(res);
+            if(res.status==='ok')
+            {
+                emit({name:'add_note:ok'});
+            }
+            else
+            {
+                emit({name:'add_note:error',message:xhr.response});
+            }
+        };
+        xhr.send();
+    }
+}
+
+module.exports=add_note;
+//
+// document.body.addEventListener('yoyo:add_note:args_check_failed',function(e)
+// {
+//     console.log(e);
+// });
+// document.body.addEventListener('yoyo:add_note:error',function(e)
+// {
+//     console.log(e);
+// });
+// document.body.addEventListener('yoyo:add_note:ok',function(e)
+// {
+//     console.log(e);
+// });
+//
+// add_note
+// (
+//     {
+//         uid:'test',
+//         cid:'test',
+//         segments:'1,2,3,4,5,6'
+//     }
+// );
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var emit=__webpack_require__(1).emit;
+var config=__webpack_require__(0);
+
+function get_class(args)
+{
+    if(!args.cid)
+    {
+        console.log(args);
+        emit({name:'get_class:args_check_failed'});
+    }
+    else
+    {
+        var xhr=new XMLHttpRequest();
+        xhr.responseType='json';
+        var url=config.base+'get_class?';
+        url+='cid='+args.cid;
+        xhr.open('get',url);
+        xhr.onload=function(e)
+        {
+            var res=xhr.response;
+            console.log(res);
+            if(res.status==='ok')
+            {
+                emit({name:'get_class:ok',message:res.message});
+            }
+            else
+            {
+                emit({name:'get_class:error',message:xhr.response});
+            }
+        };
+        xhr.send();
+    }
+}
+
+module.exports=get_class;
+//
+//
+// document.body.addEventListener('yoyo:get_class:args_check_failed',function(e)
+// {
+//     console.log(e);
+// });
+// document.body.addEventListener('yoyo:get_class:error',function(e)
+// {
+//     console.log(e);
+// });
+// document.body.addEventListener('yoyo:get_class:ok',function(e)
+// {
+//     console.log(e);
+// });
+//
+// get_class
+// (
+//     {
+//         cid:'1'
+//     }
+// );
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var emit=__webpack_require__(1).emit;
+var config=__webpack_require__(0);
+
+function get_location(args)
+{
+    if(!args.uid)
+    {
+        console.log(args);
+        emit({name:'get_location:args_check_failed'});
+    }
+    else
+    {
+        var xhr=new XMLHttpRequest();
+        xhr.responseType='json';
+        var url=config.base+'get_location?';
+        url+='uid='+args.uid;
+        xhr.open('get',url);
+        xhr.onload=function(e)
+        {
+            var res=xhr.response;
+            console.log(res);
+            if(res.status==='ok')
+            {
+                emit({name:'get_location:ok',message:res.message});
+            }
+            else
+            {
+                emit({name:'get_location:error',message:xhr.response});
+            }
+        };
+        xhr.send();
+    }
+}
+
+module.exports=get_location;
+//
+//
+// document.body.addEventListener('yoyo:get_location:args_check_failed',function(e)
+// {
+//     console.log(e);
+// });
+// document.body.addEventListener('yoyo:get_location:error',function(e)
+// {
+//     console.log(e);
+// });
+// document.body.addEventListener('yoyo:get_location:ok',function(e)
+// {
+//     console.log(e);
+// });
+//
+// get_location
+// (
+//     {
+//         uid:'test'
+//     }
+// );
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var emit=__webpack_require__(1).emit;
+var config=__webpack_require__(0);
+
+function get_notes(args)
+{
+    if(!args.uid)
+    {
+        console.log(args);
+        emit({name:'get_notes:args_check_failed'});
+    }
+    else
+    {
+        var xhr=new XMLHttpRequest();
+        xhr.responseType='json';
+        var url=config.base+'get_notes?';
+        url+='uid='+args.uid;
+        xhr.open('get',url);
+        xhr.onload=function(e)
+        {
+            var res=xhr.response;
+            console.log(res);
+            if(res.status==='ok')
+            {
+                emit({name:'get_notes:ok',message:res.message});
+            }
+            else
+            {
+                emit({name:'get_notes:error',message:res});
+            }
+        };
+        xhr.send();
+    }
+}
+
+module.exports=get_notes;
+
+
+document.body.addEventListener('yoyo:get_notes:args_check_failed',function(e)
+{
+    console.log(e);
+});
+document.body.addEventListener('yoyo:get_notes:error',function(e)
+{
+    console.log(e);
+});
+document.body.addEventListener('yoyo:get_notes:ok',function(e)
+{
+    console.log(e);
+});
+
+get_notes
+(
+    {
+        uid:'test'
+    }
+);
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+/**
+ * Created by 27822 on 2017-03-05.
+ */
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+/**
+ * Created by 27822 on 2017-03-05.
+ */
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var yoyo={};
+
+yoyo.config=__webpack_require__(0);
+
+yoyo.add_note=__webpack_require__(2);
+yoyo.get_class=__webpack_require__(3);
+yoyo.get_location=__webpack_require__(4);
+yoyo.get_notes=__webpack_require__(5);
+yoyo.query_class=__webpack_require__(6);
+yoyo.release=__webpack_require__(7);
+yoyo.set_location=__webpack_require__(8);
+
+if(window.luoc)
+{
+    window.luoc.yoyo=yoyo;
+}
+else
+{
+    window.luoc={};
+    window.luoc.yoyo=yoyo;
+}
+
+/***/ })
+/******/ ]);
