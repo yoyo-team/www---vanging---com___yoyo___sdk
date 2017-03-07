@@ -398,9 +398,63 @@ module.exports=query_class;
 
 /***/ }),
 /* 7 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+var emit=__webpack_require__(1).emit;
+var config=__webpack_require__(0);
+
+function release(form)
+{
+    if(form.nodeName!=='FORM')
+    {
+        console.log(form);
+        emit({name:'get_class:args_check_failed'});
+    }
+    else
+    {
+        form=new FormData(form);
+        var xhr=new XMLHttpRequest();
+        xhr.responseType='json';
+        var url=config.base+'release?';
+        xhr.open('post',url);
+        xhr.onload=function(e)
+        {
+            var res=xhr.response;
+            console.log(res);
+            if(res.status==='ok')
+            {
+                emit({name:'release:ok',message:res.message});
+            }
+            else
+            {
+                emit({name:'release:error',message:xhr.response});
+            }
+        };
+        xhr.send(form);
+    }
+}
+
+module.exports=release;
 
 
+document.body.addEventListener('yoyo:release:args_check_failed',function(e)
+{
+    console.log(e);
+});
+document.body.addEventListener('yoyo:release:error',function(e)
+{
+    console.log(e);
+});
+document.body.addEventListener('yoyo:release:ok',function(e)
+{
+    console.log(e);
+});
+
+document.getElementById('form').addEventListener('submit',function(e)
+{
+    e.preventDefault();
+    release(document.getElementById('form'));
+});
 
 /***/ }),
 /* 8 */
@@ -442,28 +496,28 @@ function set_location(args)
 }
 
 module.exports=set_location;
-
-
-document.body.addEventListener('yoyo:set_location:args_check_failed',function(e)
-{
-    console.log(e);
-});
-document.body.addEventListener('yoyo:set_location:error',function(e)
-{
-    console.log(e);
-});
-document.body.addEventListener('yoyo:set_location:ok',function(e)
-{
-    console.log(e);
-});
-
-set_location
-(
-    {
-        uid:'test',
-        location:'test'
-    }
-);
+//
+//
+// document.body.addEventListener('yoyo:set_location:args_check_failed',function(e)
+// {
+//     console.log(e);
+// });
+// document.body.addEventListener('yoyo:set_location:error',function(e)
+// {
+//     console.log(e);
+// });
+// document.body.addEventListener('yoyo:set_location:ok',function(e)
+// {
+//     console.log(e);
+// });
+//
+// set_location
+// (
+//     {
+//         uid:'test',
+//         location:'test'
+//     }
+// );
 
 /***/ }),
 /* 9 */
