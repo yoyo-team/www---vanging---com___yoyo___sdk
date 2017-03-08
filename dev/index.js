@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -159,6 +159,69 @@ module.exports=add_note;
 var emit=__webpack_require__(1).emit;
 var config=__webpack_require__(0);
 
+function delete_note(args)
+{
+    if(!args.cid || !args.uid)
+    {
+        console.log(args);
+        emit({name:'delete_note:args_check_failed'});
+    }
+    else
+    {
+        var xhr=new XMLHttpRequest();
+        xhr.responseType='json';
+        var url=config.base+'delete_note?';
+        url+='cid='+args.cid+'&';
+        url+='uid='+args.uid;
+        xhr.open('get',url);
+        xhr.onload=function(e)
+        {
+            var res=xhr.response;
+            console.log(res);
+            if(res.status==='ok')
+            {
+                emit({name:'delete_note:ok'});
+            }
+            else
+            {
+                emit({name:'delete_note:error',message:res});
+            }
+        };
+        xhr.send();
+    }
+}
+
+module.exports=delete_note;
+//
+//
+// document.body.addEventListener('yoyo:delete_note:args_check_failed',function(e)
+// {
+//     console.log(e);
+// });
+// document.body.addEventListener('yoyo:delete_note:error',function(e)
+// {
+//     console.log(e);
+// });
+// document.body.addEventListener('yoyo:delete_note:ok',function(e)
+// {
+//     console.log(e);
+// });
+//
+// delete_note
+// (
+//     {
+//         cid:'test',
+//         uid:'test'
+//     }
+// );
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var emit=__webpack_require__(1).emit;
+var config=__webpack_require__(0);
+
 function get_class(args)
 {
     if(!args.cid)
@@ -214,7 +277,7 @@ module.exports=get_class;
 // );
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var emit=__webpack_require__(1).emit;
@@ -275,7 +338,7 @@ module.exports=get_location;
 // );
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var emit=__webpack_require__(1).emit;
@@ -336,7 +399,7 @@ module.exports=get_notes;
 // );
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var emit=__webpack_require__(1).emit;
@@ -397,7 +460,7 @@ module.exports=query_class;
 // );
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var emit=__webpack_require__(1).emit;
@@ -435,29 +498,29 @@ function release(form)
 }
 
 module.exports=release;
-
-
-document.body.addEventListener('yoyo:release:args_check_failed',function(e)
-{
-    console.log(e);
-});
-document.body.addEventListener('yoyo:release:error',function(e)
-{
-    console.log(e);
-});
-document.body.addEventListener('yoyo:release:ok',function(e)
-{
-    console.log(e);
-});
-
-document.getElementById('form').addEventListener('submit',function(e)
-{
-    e.preventDefault();
-    release(document.getElementById('form'));
-});
+//
+//
+// document.body.addEventListener('yoyo:release:args_check_failed',function(e)
+// {
+//     console.log(e);
+// });
+// document.body.addEventListener('yoyo:release:error',function(e)
+// {
+//     console.log(e);
+// });
+// document.body.addEventListener('yoyo:release:ok',function(e)
+// {
+//     console.log(e);
+// });
+//
+// document.getElementById('form').addEventListener('submit',function(e)
+// {
+//     e.preventDefault();
+//     release(document.getElementById('form'));
+// });
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var emit=__webpack_require__(1).emit;
@@ -520,20 +583,21 @@ module.exports=set_location;
 // );
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var yoyo={};
 
 yoyo.config=__webpack_require__(0);
 
+yoyo.delete_note=__webpack_require__(3);
 yoyo.add_note=__webpack_require__(2);
-yoyo.get_class=__webpack_require__(3);
-yoyo.get_location=__webpack_require__(4);
-yoyo.get_notes=__webpack_require__(5);
-yoyo.query_class=__webpack_require__(6);
-yoyo.release=__webpack_require__(7);
-yoyo.set_location=__webpack_require__(8);
+yoyo.get_class=__webpack_require__(4);
+yoyo.get_location=__webpack_require__(5);
+yoyo.get_notes=__webpack_require__(6);
+yoyo.query_class=__webpack_require__(7);
+yoyo.release=__webpack_require__(8);
+yoyo.set_location=__webpack_require__(9);
 
 if(window.luoc)
 {
