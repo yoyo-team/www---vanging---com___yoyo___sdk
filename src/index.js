@@ -2,8 +2,8 @@ var yoyo={};
 
 yoyo.config=require('./config');
 
-yoyo.delete_note=require('./delete_note');
 yoyo.add_note=require('./add_note');
+yoyo.delete_note=require('./delete_note');
 yoyo.get_class=require('./get_class');
 yoyo.get_location=require('./get_location');
 yoyo.get_notes=require('./get_notes');
