@@ -18,7 +18,6 @@ function release(form)
         xhr.onload=function(e)
         {
             var res=xhr.response;
-            console.log(res);
             if(res.status==='ok')
             {
                 emit({name:'release:ok',message:res.message});

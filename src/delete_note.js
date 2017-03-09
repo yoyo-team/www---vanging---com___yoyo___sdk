@@ -19,7 +19,6 @@ function delete_note(args)
         xhr.onload=function(e)
         {
             var res=xhr.response;
-            console.log(res);
             if(res.status==='ok')
             {
                 emit({name:'delete_note:ok'});

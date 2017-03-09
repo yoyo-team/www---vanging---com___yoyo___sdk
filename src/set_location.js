@@ -19,7 +19,6 @@ function set_location(args)
         xhr.onload=function(e)
         {
             var res=xhr.response;
-            console.log(res);
             if(res.status==='ok')
             {
                 emit({name:'set_location:ok',message:res.message});

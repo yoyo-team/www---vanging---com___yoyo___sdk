@@ -3,9 +3,10 @@ var config=require('./config');
 
 function query_class(args)
 {
-    if(!args.class_name)
+    if(!args.key)
     {
-        console.log(args);
+        console.error('[ query_class ] : 参数检查失败');
+        console.error(args);
         emit({name:'query_class:args_check_failed'});
     }
     else
@@ -13,19 +14,18 @@ function query_class(args)
         var xhr=new XMLHttpRequest();
         xhr.responseType='json';
         var url=config.base+'query_class?';
-        url+='class_name='+args.class_name;
+        url+='key='+args.key;
         xhr.open('get',url);
         xhr.onload=function(e)
         {
             var res=xhr.response;
-            console.log(res);
             if(res.status==='ok')
             {
                 emit({name:'query_class:ok',message:res.message});
             }
             else
             {
-                emit({name:'query_class:error',message:xhr.response});
+                emit({name:'query_class:error',message:res});
             }
         };
         xhr.send();
@@ -51,6 +51,6 @@ module.exports=query_class;
 // query_class
 // (
 //     {
-//         class_name:'test'
+//         key:'吉大'
 //     }
 // );

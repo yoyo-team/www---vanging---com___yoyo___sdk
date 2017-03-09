@@ -18,7 +18,6 @@ function get_class(args)
         xhr.onload=function(e)
         {
             var res=xhr.response;
-            console.log(res);
             if(res.status==='ok')
             {
                 emit({name:'get_class:ok',message:res.message});

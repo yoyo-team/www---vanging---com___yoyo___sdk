@@ -5,7 +5,8 @@ function get_location(args)
 {
     if(!args.uid)
     {
-        console.log(args);
+        console.error('[ get_location ] : 参数检查失败');
+        console.error(args);
         emit({name:'get_location:args_check_failed'});
     }
     else
@@ -18,7 +19,6 @@ function get_location(args)
         xhr.onload=function(e)
         {
             var res=xhr.response;
-            console.log(res);
             if(res.status==='ok')
             {
                 emit({name:'get_location:ok',message:res.message});
