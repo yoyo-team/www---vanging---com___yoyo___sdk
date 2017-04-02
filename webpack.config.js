@@ -1,16 +1,43 @@
+let webpack=require('webpack');
 let path=require('path');
 
-let config=
+module.exports=
     {
-        entry:
-            {
-                index:path.join(__dirname,'src','index.js')
-            },
+        entry:'./src/index.js',
         output:
             {
-                path:path.join(__dirname,'dev'),
-                filename:'[name].js'
+                path:path.resolve(__dirname,'dev'),
+                filename:'index.js'
+            },
+        module:
+            {
+                loaders:
+                    [
+                        {
+                            test: /\.vue$/,
+                            loader: 'vue-loader'
+                        },
+                        {
+                            test:/\.js$/,
+                            loader:'babel-loader',
+                            exclude:'/node_modules/'
+                        }
+                    ]
+            },
+        babel:
+            {
+                presets:['latest']
+                // , plugins:
+                //     [
+                //         [
+                //             'transform-runtime',
+                //             {
+                //                 polyfill: true,
+                //                 regenerator: true,
+                //                 helpers: true,
+                //                 moduleName:'babel-runtime'
+                //             }
+                //         ]
+                // ]
             }
     };
-
-module.exports=config;

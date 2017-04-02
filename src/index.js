@@ -7,6 +7,7 @@ yoyo.delete_note=require('./delete_note');
 yoyo.get_class=require('./get_class');
 yoyo.get_location=require('./get_location');
 yoyo.get_notes=require('./get_notes');
+yoyo.get_statistics=require('./get_statistics');
 yoyo.query_class=require('./query_class');
 yoyo.release=require('./release');
 yoyo.set_location=require('./set_location');
