@@ -401,19 +401,25 @@
 
 	module.exports = get_statistics;
 
-	document.body.addEventListener('yoyo:get_statistics:args_check_failed', function (e) {
-	    console.log(e);
-	});
-	document.body.addEventListener('yoyo:get_statistics:error', function (e) {
-	    console.log(e);
-	});
-	document.body.addEventListener('yoyo:get_statistics:ok', function (e) {
-	    console.log(e);
-	});
-
-	get_statistics({
-	    cid: 'test1'
-	});
+	// document.body.addEventListener('yoyo:get_statistics:args_check_failed',function(e)
+	// {
+	//     console.log(e);
+	// });
+	// document.body.addEventListener('yoyo:get_statistics:error',function(e)
+	// {
+	//     console.log(e);
+	// });
+	// document.body.addEventListener('yoyo:get_statistics:ok',function(e)
+	// {
+	//     console.log(e);
+	// });
+	//
+	// get_statistics
+	// (
+	//     {
+	//         cid:'test1'
+	//     }
+	// );
 
 /***/ },
 /* 9 */
