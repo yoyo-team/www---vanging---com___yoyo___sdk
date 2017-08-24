@@ -1,8 +1,8 @@
-import getProfileFromSession from './module/getProfileFromSession';
+import addNote from './module/addNote';
 
 const yoyo =
     {
-        getProfileFromSession,
+        addNote,
     };
 
 export default yoyo;

@@ -1,2 +1,2 @@
-import './util.test';
-import './module/getProfileFromSession.test';
+// import './util.test';
+import './module/addNote.test';
