@@ -4,6 +4,6 @@ describe(' [ addNote ] > default()', function()
 {
     it('should make the request', function()
     {
-        return addNote('session');
+        return addNote();
     })
 });
