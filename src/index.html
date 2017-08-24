@@ -8,10 +8,36 @@
 
     <title>user sdk</title>
 
+    <style>
+        form,
+        input,
+        button
+        {
+            font-size: 20px;
+        }
+    </style>
+
 </head>
 <body>
 <h1>Unit Test</h1>
 <div id="mocha"></div>
+
+<form action="//localhost:8080/yoyo/releaseClass" id="form" method="post" enctype="multipart/form-data">
+    <label for="name">name:</label>
+    <input id="name" name="class_name" value="name">
+    <br>
+    <label for="releaser">releaser:</label>
+    <input id="releaser" name="class_releaser" value="releaser">
+    <br>
+    <label for="location">location:</label>
+    <input id="location" name="class_location" value="location">
+    <br>
+    <label for="file">file:</label>
+    <input type="file" id="file" name="class_file">
+    <br>
+</form>
+<button onclick="release()">send</button>
+
 
 <script src="//cdn.bootcss.com/mocha/3.5.0/mocha.js"></script>
 

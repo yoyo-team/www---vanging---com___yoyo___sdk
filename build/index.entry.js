@@ -63,11 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 12);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -79,7 +80,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.be = undefined;
 exports.get = get;
 
-var _config = __webpack_require__(2);
+var _config = __webpack_require__(1);
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -112,25 +113,8 @@ be.get = function (url) {
 exports.be = be;
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-exports.default = function (session) {
-    var url = '/getProfileFromSession?session=' + session;
-    return _util.be.get(url);
-};
-
-var _util = __webpack_require__(0);
-
-/***/ }),
-/* 2 */
+/***/ 1:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -150,9 +134,8 @@ if (true) {
 exports.default = config;
 
 /***/ }),
-/* 3 */,
-/* 4 */,
-/* 5 */
+
+/***/ 12:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -162,14 +145,14 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _getProfileFromSession = __webpack_require__(1);
+var _addNote = __webpack_require__(2);
 
-var _getProfileFromSession2 = _interopRequireDefault(_getProfileFromSession);
+var _addNote2 = _interopRequireDefault(_addNote);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var yoyo = {
-    getProfileFromSession: _getProfileFromSession2.default
+    addNote: _addNote2.default
 };
 
 exports.default = yoyo;
@@ -177,5 +160,25 @@ exports.default = yoyo;
 
 window['www---vanging---com___sdk___yoyo'] = yoyo;
 
+/***/ }),
+
+/***/ 2:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (user_id, class_id, note_content) {
+    var url = '/addOrUpdateNote?user_id=' + user_id + '&class_id=' + class_id + '&note_content=' + note_content;
+    return _util.be.get(url);
+};
+
+var _util = __webpack_require__(0);
+
 /***/ })
-/******/ ]);
+
+/******/ });

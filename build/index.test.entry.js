@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 20);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -79,7 +79,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.be = undefined;
 exports.get = get;
 
-var _config = __webpack_require__(2);
+var _config = __webpack_require__(1);
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -121,24 +121,6 @@ exports.be = be;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-exports.default = function (session) {
-    var url = '/getProfileFromSession?session=' + session;
-    return _util.be.get(url);
-};
-
-var _util = __webpack_require__(0);
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
 var config = {};
 
 if (true) {
@@ -150,26 +132,7 @@ if (true) {
 exports.default = config;
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _getProfileFromSession = __webpack_require__(1);
-
-var _getProfileFromSession2 = _interopRequireDefault(_getProfileFromSession);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-describe(' [ getProfileFromSession ] > default()', function () {
-    it('should make the request', function () {
-        return (0, _getProfileFromSession2.default)('session');
-    });
-});
-
-/***/ }),
-/* 4 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -178,33 +141,333 @@ describe(' [ getProfileFromSession ] > default()', function () {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = test;
+
+exports.default = function (user_id, class_id, note_content) {
+    var url = '/addOrUpdateNote?user_id=' + user_id + '&class_id=' + class_id + '&note_content=' + note_content;
+    return _util.be.get(url);
+};
 
 var _util = __webpack_require__(0);
 
-function test() {}
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
 
-describe('[ util ] > get()', function () {
-    it('return result with the right url', function () {
-        return (0, _util.get)('https://api.github.com');
-    });
-    it('return error with the wrong url', function (done) {
-        (0, _util.get)('https://be.www.vanging.com').then(function () {}, function (err) {
-            console.log(err);
-            done();
-        });
-    });
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
 });
 
-describe('[ util.be ] > get()', function () {
-    it('do request depending on the environment', function () {
-        return _util.be.get('/exist');
+exports.default = function (form) {
+    return new Promise(function (resolve, reject) {
+        form = new FormData(form);
+        console.log(form);
+        var xhr = new XMLHttpRequest();
+        var url = _config2.default.baseUrl + '/releaseClass';
+        xhr.open('post', url);
+        xhr.onerror = function () {
+            reject(xhr.response);
+        };
+        xhr.onload = function (e) {
+            if (xhr.status === 200) {
+                resolve(xhr.response);
+            } else {
+                reject(xhr.response);
+            }
+        };
+        xhr.send(form);
+    });
+};
+
+var _config = __webpack_require__(1);
+
+var _config2 = _interopRequireDefault(_config);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _addNote = __webpack_require__(2);
+
+var _addNote2 = _interopRequireDefault(_addNote);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+describe(' [ addNote ] > default()', function () {
+    it('should make the request', function () {
+        return (0, _addNote2.default)();
     });
 });
 
 /***/ }),
-/* 5 */,
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _deleteNote = __webpack_require__(13);
+
+var _deleteNote2 = _interopRequireDefault(_deleteNote);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+describe(' [ deleteNote ] > default()', function () {
+    it('should make the request', function () {
+        return (0, _deleteNote2.default)();
+    });
+});
+
+/***/ }),
 /* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _getClass = __webpack_require__(14);
+
+var _getClass2 = _interopRequireDefault(_getClass);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+describe(' [ getClass ] > default()', function () {
+    it('should make the request', function () {
+        return (0, _getClass2.default)();
+    });
+});
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _getLocation = __webpack_require__(15);
+
+var _getLocation2 = _interopRequireDefault(_getLocation);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+describe(' [ getLocation ] > default()', function () {
+    it('should make the request', function () {
+        return (0, _getLocation2.default)();
+    });
+});
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _getNotes = __webpack_require__(16);
+
+var _getNotes2 = _interopRequireDefault(_getNotes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+describe(' [ getNotes ] > default()', function () {
+    it('should make the request', function () {
+        return (0, _getNotes2.default)();
+    });
+});
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _getStatistics = __webpack_require__(17);
+
+var _getStatistics2 = _interopRequireDefault(_getStatistics);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+describe(' [ getStatistics ] > default()', function () {
+    it('should make the request', function () {
+        return (0, _getStatistics2.default)();
+    });
+});
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _queryClass = __webpack_require__(18);
+
+var _queryClass2 = _interopRequireDefault(_queryClass);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+describe(' [ queryClass ] > default()', function () {
+    it('should make the request', function () {
+        return (0, _queryClass2.default)();
+    });
+});
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _setLocation = __webpack_require__(19);
+
+var _setLocation2 = _interopRequireDefault(_setLocation);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+describe(' [ setLocation ] > default()', function () {
+    it('should make the request', function () {
+        return (0, _setLocation2.default)();
+    });
+});
+
+/***/ }),
+/* 12 */,
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (user_id, class_id) {
+    var url = '/deleteNote?user_id=' + user_id + '&class_id=' + class_id;
+    return _util.be.get(url);
+};
+
+var _util = __webpack_require__(0);
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (class_id) {
+    var url = '/getClass?class_id=' + class_id;
+    return _util.be.get(url);
+};
+
+var _util = __webpack_require__(0);
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (user_id) {
+    var url = '/getLocation?user_id=' + user_id;
+    return _util.be.get(url);
+};
+
+var _util = __webpack_require__(0);
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (user_id) {
+    var url = '/getNotes?user_id=' + user_id;
+    return _util.be.get(url);
+};
+
+var _util = __webpack_require__(0);
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (class_id) {
+    var url = '/getStatistics?class_id=' + class_id;
+    return _util.be.get(url);
+};
+
+var _util = __webpack_require__(0);
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (key_word) {
+    var url = '/queryClass?key_word=' + key_word;
+    return _util.be.get(url);
+};
+
+var _util = __webpack_require__(0);
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (user_id, user_location) {
+    var url = '/setLocation?user_id=' + user_id + '&user_location=' + user_location;
+    return _util.be.get(url);
+};
+
+var _util = __webpack_require__(0);
+
+/***/ }),
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -212,7 +475,39 @@ describe('[ util.be ] > get()', function () {
 
 __webpack_require__(4);
 
-__webpack_require__(3);
+__webpack_require__(5);
+
+__webpack_require__(6);
+
+__webpack_require__(7);
+
+__webpack_require__(8);
+
+__webpack_require__(9);
+
+__webpack_require__(10);
+
+__webpack_require__(11);
+
+var _releaseClass = __webpack_require__(3);
+
+var _releaseClass2 = _interopRequireDefault(_releaseClass);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function release(e) {
+    e.preventDefault();
+    (0, _releaseClass2.default)(document.getElementById('form')).then(function (result) {
+        console.log(result);
+        alert('success');
+    }, function (err) {
+        console.log(err);
+        alert('fail');
+    });
+} // import './util.test';
+
+
+window.release = release;
 
 /***/ })
 /******/ ]);
