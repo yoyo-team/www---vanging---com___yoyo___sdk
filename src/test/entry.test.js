@@ -4,3 +4,4 @@ import './module/deleteNote.test';
 import './module/getClass.test';
 import './module/getLocation.test';
 import './module/getNotes.test';
+import './module/getStatistics.test';
