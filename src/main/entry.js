@@ -1,6 +1,7 @@
 import addNote from './module/addNote';
 import deleteNote from './module/deleteNote';
 import getClass from './module/getClass';
+import getClassContent from './module/getClassContent';
 import getLocation from './module/getLocation';
 import getNotes from './module/getNotes';
 import getStatistics from './module/getStatistics';
@@ -13,6 +14,7 @@ const yoyo =
         addNote,
         deleteNote,
         getClass,
+        getClassContent,
         getLocation,
         getNotes,
         getStatistics,
@@ -23,4 +25,4 @@ const yoyo =
 
 export default yoyo;
 
-window['www---vanging---com___sdk___yoyo'] = yoyo;
+window['www---vanging---com___yoyo___sdk'] = yoyo;
